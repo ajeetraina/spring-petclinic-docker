@@ -11,23 +11,42 @@ This repository contains an enhanced version of the Spring PetClinic application
 
 ## Running the Application
 
-1. Clone this repository:
+### Using Docker Compose (Recommended)
 
 ```bash
-git clone https://github.com/ajeetraina/spring-petclinic-docker.git
-cd spring-petclinic-docker
-git checkout angular-postgres
+./run-docker.sh
 ```
 
-2. Run the application using Docker Compose:
+Or manually:
 
 ```bash
+docker-compose -f docker-compose.angular-postgres.yml build
 docker-compose -f docker-compose.angular-postgres.yml up
 ```
 
-3. Access the application:
-   - Backend: http://localhost:8080
-   - Frontend: http://localhost:4200
+### For Local Development
+
+1. Start a PostgreSQL container
+```bash
+docker run --name petclinic-postgres -e POSTGRES_PASSWORD=petclinic -e POSTGRES_USER=petclinic -e POSTGRES_DB=petclinic -p 5432:5432 -d postgres:14-alpine
+```
+
+2. Run the Spring Boot application
+```bash
+./mvnw spring-boot:run -Dspring-boot.run.profiles=postgres -Dcheckstyle.skip=true -Dspring-javaformat.skip=true
+```
+
+3. Install and run the Angular frontend
+```bash
+cd angular-frontend
+npm install
+npm start
+```
+
+## Access the Application
+
+- Frontend: http://localhost:4200
+- Backend API: http://localhost:8080/api
    
 ## Architecture
 
@@ -42,20 +61,17 @@ docker-compose -f docker-compose.angular-postgres.yml up
 - `/api/vets`: Veterinarian management
 - `/api/visits`: Visit management
 
-## Development
+## Directory Structure
 
-### Backend Development
-
-```bash
-./mvnw spring-boot:run -Dspring-boot.run.profiles=postgres
 ```
-
-### Frontend Development
-
-```bash
-cd angular-frontend
-npm install
-npm start
+.
+├── angular-frontend/       # Angular frontend application
+├── src/                    # Spring Boot backend application
+├── docker-compose.yml      # Standard Docker Compose configuration
+├── docker-compose.angular-postgres.yml # Docker Compose with Angular and PostgreSQL
+├── Dockerfile              # Standard Dockerfile for Spring Boot app
+├── Dockerfile.backend      # Dockerfile for Spring Boot with PostgreSQL
+└── README.md
 ```
 
 ## License
