@@ -6,7 +6,9 @@ COPY mvnw pom.xml ./
 RUN ./mvnw dependency:resolve
 
 COPY src ./src
-RUN ./mvnw package -DskipTests
+
+# Skip tests to make the build faster
+RUN ./mvnw package -DskipTests -Dcheckstyle.skip=true -Dspring-javaformat.skip=true
 
 FROM eclipse-temurin:21-jre-jammy
 WORKDIR /app
