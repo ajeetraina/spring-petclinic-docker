@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f9f9f9;
+}
+
+.container {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.jumbotron {
+  background-color: #e9ecef;
+  padding: 4rem 2rem;
+  margin-bottom: 2rem;
+  border-radius: .3rem;
+}
+
+.table th {
+  background-color: #f8f9fa;
+}
+
+.btn-primary {
+  background-color: #42B983;
+  border-color: #42B983;
+}
+
+.btn-primary:hover {
+  background-color: #3aa876;
+  border-color: #3aa876;
+}
